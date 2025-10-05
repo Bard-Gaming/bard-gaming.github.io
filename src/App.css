@@ -1,3 +1,10 @@
+* {
+    /* Size */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 #root {
     /* Size */
     width: 100vw;
@@ -6,4 +13,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    /* Color */
+    color: var(--color-light-200);
+    background-color: var(--color-dark-100);
 }

@@ -3,19 +3,16 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Variables */
+  --color-dark-100: #1b1b1b;
+  --color-dark-200: #242424;
+
+  --color-light-100: #ffffff;
+  --color-light-200: #fafafa;
+  --color-light-300: #eaeaea;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-    /* Size */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
 }
