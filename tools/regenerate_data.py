@@ -35,7 +35,7 @@ def process_enchantments(line: str) -> Iterator[dict[str, str]]:
         }
 
 
-def generate_data(source: str | Path, destination: str | Path) -> None:
+def process_file_data(source: str | Path) -> list[dict]:
     with open(source, "rt") as file:
         csv_dict = DictReader(file.readlines())
 
@@ -54,22 +54,58 @@ def generate_data(source: str | Path, destination: str | Path) -> None:
 
     line_data.sort(key=lambda data: data.get("Dividend", -1))
 
-    with open(destination, "wt") as file:
-        file.write(json.dumps(line_data, indent=2))
+    return line_data
 
-
-def main():
-    source_dir = root_dir / "data"
-    destination_dir = root_dir / "public" / "data"
+def generate_data(source_dir: str | Path, destination_dir: str | Path, /, *, pretty: bool = False) -> None:
+    data_files = set()
+    bundled_data = {}
 
     for file_name in os.listdir(source_dir):
         extensionless_name = ".".join(file_name.split('.')[:-1])
+        data_files.add(extensionless_name)
 
-        generate_data(
-            source_dir / file_name,
-            destination_dir / f"{extensionless_name}.json"
+        bundled_data[extensionless_name] = process_file_data(source_dir / file_name)
+    
+    with open(destination_dir / "lookup.json", "wt") as file:
+        indent = 2 if pretty else None
+        file.write(json.dumps(bundled_data, indent=indent))
+
+    with open(destination_dir / "types.ts", "wt") as file:
+        lookup_elements = "\n".join(f"    {name}: MahouTsukaiDividendData[];" for name in data_files)
+        content = (
+            "/**\n"
+            " * This file is auto generated. Please do not manually modify,\n"
+            " * as changes will get discarded.\n"
+            " */\n"
+            "\n"
+            "export type MinecraftEnchantment = {\n"
+            "    id: string;\n"
+            "    lvl: number;\n"
+            "};\n"
+            "\n"
+            "export type MahouTsukaiDividendData = {\n"
+            "    dividend: number;\n"
+            "    enchantments: {"
+            "        option_low: MinecraftEnchantment[];\n"
+            "        option_medium: MinecraftEnchantment[];\n"
+            "        option_high: MinecraftEnchantment[];\n"
+            "    };\n"
+            "};\n"
+            "\n"
+            "export type MahouTsukaiLookup = {\n"
+            f"{lookup_elements}\n"
+            "};\n"
         )
 
+        file.write(content)
+
+def main():
+    source_dir = root_dir / "data" / "mahou_tsukai"
+    destination_dir = root_dir / "src" / "pages" / "MahouTsukaiLookupPage" / "data"
+
+    generate_data(source_dir, destination_dir)
+
+    print(f"Generated files in {destination_dir}")
 
 if __name__ == '__main__':
     main()
