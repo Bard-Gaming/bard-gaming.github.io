@@ -1,3 +1,17 @@
 .home {
+    padding: 15px 50px;
+}
 
+.tools > h1 {
+    margin-bottom: 5px;
+}
+
+.tools_content {
+    /* Display */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 15px;
 }
