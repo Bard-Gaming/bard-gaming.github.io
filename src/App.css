@@ -18,3 +18,7 @@
     color: var(--color-light-200);
     background-color: var(--color-dark-200);
 }
+
+a {
+    text-decoration: none;
+}

@@ -1,8 +1,6 @@
-import { useContext } from "react";
+import { Link } from "react-router";
 import styles from './NavigationBar.module.css';
 import Logo from '/teadore.jpg';
-import CurrentPageContext from "../../hooks/CurrentPageContext";
-import HomePage from "../../pages/HomePage/HomePage";
 
 
 interface NavigationBarProps {
@@ -11,17 +9,12 @@ interface NavigationBarProps {
 
 
 function NavigationBar({ title }: NavigationBarProps) {
-    const [_currentPage, setCurrentPage] = useContext(CurrentPageContext);
-
     return (
         <nav className={styles.navigation_bar}>
             {/* Left */}
             <div className={styles.navbar_aligner}>
-                <img className={styles.navbar_logo} onClick={() => setCurrentPage(<HomePage />)} src={Logo} />
-                
-                <h1 className={styles.navbar_title} onClick={() => setCurrentPage(<HomePage />)}>
-                    {title}
-                </h1>
+                <Link to="/"><img className={styles.navbar_logo} src={Logo} /></Link>
+                <Link to="/"><h1 className={styles.navbar_title}>{title}</h1></Link>
             </div>
 
             {/* Right */}
