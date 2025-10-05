@@ -1,0 +1,77 @@
+.minecraft_inventory {
+    /* Size */
+    padding: 20px 10px;
+    border: 2px solid;
+    box-sizing: content-box;
+
+    /* Color */
+    border-color: #373737 #fff #fff #373737;
+    background-color: #c6c6c6;
+
+    /* Display */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+.inventory_item {
+    /* Size */
+    width: 36px;
+    height: 36px;
+    border: 2px solid;
+
+    /* Color */
+    background-color: #8b8b8b;
+    border-color: #373737 #fff #fff #373737;
+
+    /* Misc. */
+    user-select: none;
+    cursor: pointer;
+}
+
+.inventory_item:hover {
+    background-color: #fff6;
+}
+
+.item_panel {
+    /* Variables */
+    --outer-border-width: 2px;
+    --obw-a: var(--outer-border-width);
+    --obw-b: calc(0px - var(--outer-border-width));
+
+    /* Size */
+    padding: 5px;
+    border: 2px solid #000060;
+
+    /* Display */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    /* Position */
+    position: fixed;
+
+    /* Color */
+    background-color: #000000ea;
+    box-shadow:
+        var(--obw-a) 0px 0px 0px black,
+        0px var(--obw-a) 0px 0px black,
+        var(--obw-b) 0px 0px 0px black,
+        0px var(--obw-b) 0px 0px black;
+
+    /* Misc. */
+    pointer-events: none;
+    user-select: none;
+}
+
+.panel_name {
+
+}
+
+.panel_id {
+
+}
