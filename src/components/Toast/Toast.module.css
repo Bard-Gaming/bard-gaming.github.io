@@ -1,0 +1,78 @@
+.toast_spacer {
+    /* Variables */
+    --outline-width: 2px;
+
+    /* Size */
+    width: fit-content;
+    height: fit-content;
+    padding: var(--outline-width);
+}
+
+.toast {
+    /* Size */
+    width: fit-content;
+    padding: 15px;
+    padding-left: 10px;
+    border-radius: 13px;
+    
+    /* Display */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 10px;
+
+    /* Color */
+    background-color: var(--color-dark-100);
+    border: 2px solid var(--color-dark-200);
+    outline: var(--outline-width) solid #000000;
+
+    /* Transition */
+    transition: outline-color 150ms ease-out;
+}
+
+.toast_clickable {
+    user-select: none;
+    cursor: pointer;
+}
+
+.toast_clickable:hover {
+    outline-color: #ffff0040;
+}
+
+.toast_clickable:active {
+    outline-color: var(--color-yellow-300);
+}
+
+.toast_icon {
+    width: 50px;
+}
+
+.text_content {
+    /* Display */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.text_title,
+.user_text {
+    /* Size */
+    width: 100%;
+
+    /* Overflow */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    white-space: nowrap;
+}
+
+.text_title {
+    /* Text */
+    color: var(--color-yellow-100);
+}
+
+.user_text {
+    /* Text */
+    color: var(--color-light-200);
+}
