@@ -101,7 +101,7 @@ def generate_data(source_dir: str | Path, destination_dir: str | Path, /, *, pre
 
 def main():
     source_dir = root_dir / "data" / "mahou_tsukai"
-    destination_dir = root_dir / "src" / "pages" / "MahouTsukaiLookupPage" / "data"
+    destination_dir = root_dir / "src" / "pages" / "MahouTsukai" / "EnchantLookup" / "data"
 
     generate_data(source_dir, destination_dir)
 

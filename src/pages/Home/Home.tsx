@@ -1,9 +1,13 @@
+import styles from './Home.module.css';
 import Toast from "../../components/Toast/Toast";
 import enchantedBook from '../../assets/enchanted_book.gif';
 
-function HomePage() {
+function Home() {
     return (
-        <section>
+        <section className={styles.home}>
+            <div className={styles.home_tools}>
+
+            </div>
             <Toast
                 icon={enchantedBook}
                 title="Mahou Tsukai"
@@ -15,4 +19,4 @@ function HomePage() {
     );
 }
 
-export default HomePage;
+export default Home;

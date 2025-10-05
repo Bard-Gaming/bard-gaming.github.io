@@ -1,16 +1,17 @@
-import styles from './MahouTsukaiLookupPage.module.css';
+import styles from './EnchantLookup.module.css';
 import lookupData from './data/lookup.json'
 
 
-function MahouTsukaiLookupPage() {
+function EnchantLookup() {
     console.log(lookupData);
+
     return (
-        <section>
+        <section className={styles.enchant_lookup}>
             <h1>Mahou Tsukai Lookup</h1>
         </section>
     );
 }
 
 
-export default MahouTsukaiLookupPage;
+export default EnchantLookup;
 
