@@ -85,7 +85,7 @@ def generate_data(source_dir: str | Path, destination_dir: str | Path, /, *, pre
             "\n"
             "export type MahouTsukaiDividendData = {\n"
             "    dividend: number;\n"
-            "    enchantments: {"
+            "    enchantments: {\n"
             "        option_low: MinecraftEnchantment[];\n"
             "        option_medium: MinecraftEnchantment[];\n"
             "        option_high: MinecraftEnchantment[];\n"

@@ -10,7 +10,8 @@ export type MinecraftEnchantment = {
 
 export type MahouTsukaiDividendData = {
     dividend: number;
-    enchantments: {        option_low: MinecraftEnchantment[];
+    enchantments: {
+        option_low: MinecraftEnchantment[];
         option_medium: MinecraftEnchantment[];
         option_high: MinecraftEnchantment[];
     };
