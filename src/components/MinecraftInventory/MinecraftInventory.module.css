@@ -1,8 +1,10 @@
 .minecraft_inventory {
     /* Size */
-    padding: 20px 10px;
+    max-width: 100%;
+    min-height: 60px;
+    padding: 10px;
     border: 2px solid;
-    box-sizing: content-box;
+    border-radius: 6px;
 
     /* Color */
     border-color: #373737 #fff #fff #373737;

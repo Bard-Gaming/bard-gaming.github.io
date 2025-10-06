@@ -15,6 +15,7 @@ type MinecraftItemProps = {
 interface MinecraftInventoryProps {
     items?: MinecraftItem[];
     onClick?: (item: MinecraftItem) => void;
+    columns?: number;
 }
 
 function MinecraftItem({ item, onClick }: MinecraftItemProps) {
@@ -42,13 +43,13 @@ function MinecraftItem({ item, onClick }: MinecraftItemProps) {
 }
 
 
-function MinecraftInventory({ onClick, items = [] }: MinecraftInventoryProps) {
+function MinecraftInventory({ onClick, items = [], columns = 13 }: MinecraftInventoryProps) {
     const itemComponents = items.map(item => (
         <MinecraftItem key={item.id} item={item} onClick={onClick} />
     ));
 
     return (
-        <div className={styles.minecraft_inventory}>
+        <div className={styles.minecraft_inventory} style={{ width: columns * 36 + 24 }}>
             {itemComponents}
         </div>
     );
