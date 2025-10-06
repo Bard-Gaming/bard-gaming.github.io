@@ -9,7 +9,7 @@ import bookImage from '../../../assets/book.png';
 import enchantedBookImage from '../../../assets/enchanted_book.gif';
 import ironSwordImage from '../../../assets/iron_sword.png';
 import enchantedIronSwordImage from '../../../assets/enchanted_iron_sword.gif';
-import type { MahouTsukaiLookup } from "./data/types";
+import type { MahouTsukaiLookup, MinecraftEnchantment } from "./data/types";
 
 
 function EnchantLookup() {
@@ -33,6 +33,10 @@ function EnchantLookup() {
         
         return newItems;
     });
+
+    if (selectedEnchants.size > 0) {
+        console.log(lookupResult(itemClass.id, [...selectedEnchants][0].id));
+    }
 
     return (
         <section className={styles.enchant_lookup}>
@@ -124,8 +128,40 @@ function displayName(id: string): string {
         .join(' ');
 }
 
+function lookupResult(itemClass: keyof MahouTsukaiLookup, enchant_id: string) {
+    const results: LookupSearchResult[] = [];
+
+    for (const dividendData of lookupData[itemClass]) {
+        Object.values(dividendData.enchantments).forEach((enchantments, level) => {
+            if (!enchantments.find(enchantment => enchantment.id === enchant_id))
+                return;
+        
+            results.push({ dividend: dividendData.dividend, level: level + 1, enchantments });
+        });
+    }
+
+    return results
+        .sort((a, b) => {
+            const levelA = a.enchantments.find(enchant => enchant.id === enchant_id)?.lvl ?? 0;
+            const levelB = b.enchantments.find(enchant => enchant.id === enchant_id)?.lvl ?? 0;
+
+            const scoreA = levelA * 1000 + a.enchantments.length * 100 - a.level * 10 - a.dividend;
+            const scoreB = levelB * 1000 + b.enchantments.length * 100 - b.level * 10 - b.dividend;
+
+            // Sort highest score to lowest
+            return - (scoreA - scoreB);
+        });
+}
+
 interface MinecraftItemClass extends MinecraftItem {
+    id: keyof MahouTsukaiLookup;
     enchantedIcon: string;
+}
+
+type LookupSearchResult = {
+    dividend: number;
+    level: number;
+    enchantments: MinecraftEnchantment[];
 }
 
 export default EnchantLookup;
