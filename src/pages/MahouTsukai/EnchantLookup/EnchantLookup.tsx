@@ -51,7 +51,7 @@ function EnchantLookup() {
                     <h1>Item Class</h1>
                     <MinecraftInventory
                         items={getItemClasses()}
-                        onClick={item => setItemClass({...item, enchantedIcon: itemClassIconLookup[item.id as keyof MahouTsukaiLookup][1]})}
+                        onClick={item => setItemClass(item)}
                     />
 
                     <h1>Enchantments</h1>
