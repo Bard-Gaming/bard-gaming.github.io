@@ -76,8 +76,8 @@ function EnchantLookup() {
             </div>
 
             <div className={styles.lookup_result}>
-                <ContentPanel title="Results">
-                    {lookupResultComponents}
+                <ContentPanel title="Results" minWidth={470} minHeight={100}>
+                    {lookupResultComponents.length > 0 ? lookupResultComponents : "No results"}
                 </ContentPanel>
             </div>
         </section>
