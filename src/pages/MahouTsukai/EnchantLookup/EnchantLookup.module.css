@@ -1,7 +1,30 @@
 .enchant_lookup {
-
+    padding-top: 30px;
 }
 
-.lookup_result {
+.user_input_panels {
+    /* Display */
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    gap: 40px;
+}
+
+.user_input_panels > * {
+    /* Size */
+    width: 550px;
+}
+
+.search_bar_container {
+    /* Size */
+    width: 100%;
+    margin-bottom: 10px;
     
+    /* Display */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
