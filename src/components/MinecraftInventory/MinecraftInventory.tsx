@@ -32,7 +32,7 @@ function MinecraftItem<T extends MinecraftItem>({ item, onClick }: MinecraftItem
     return (
         <div
             className={styles.inventory_item}
-            onMouseMove={evt => setPanelPos({x: evt.pageX, y: evt.pageY})}
+            onMouseMove={evt => setPanelPos({x: evt.clientX, y: evt.clientY})}
             onMouseLeave={() => setPanelPos(null)}
             onClick={onClick ? () => onClick(item) : undefined}
         >
