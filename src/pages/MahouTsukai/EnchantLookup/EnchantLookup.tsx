@@ -3,7 +3,6 @@ import styles from './EnchantLookup.module.css';
 import lookupData from './data/lookup.json'
 import MinecraftInventory, { type MinecraftItem } from "../../../components/MinecraftInventory/MinecraftInventory";
 import ContentPanel from "../../../components/ContentPanel/ContentPanel";
-import Toast from "../../../components/Toast/Toast";
 import probabilityAlterImage from '../../../assets/probability_alter.png';
 import enchantLevel1 from '../../../assets/enchant_level_1.png';
 import enchantLevel2 from '../../../assets/enchant_level_2.png';
