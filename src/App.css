@@ -19,6 +19,11 @@
     background-color: var(--color-dark-200);
 }
 
+body {
+    overflow-x: hidden;
+    overflow-y: overlay;
+}
+
 a {
     text-decoration: none;
 }

@@ -79,9 +79,6 @@ function EnchantLookup() {
                 <ContentPanel title="Results">
                     {lookupResultComponents}
                 </ContentPanel>
-                {/* <Toast title="Rule Breaker" icon={probabilityAlterImage}>
-                    <span>Dividend: {5}</span>
-                </Toast> */}
             </div>
         </section>
     );
