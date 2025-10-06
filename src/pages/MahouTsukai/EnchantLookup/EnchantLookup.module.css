@@ -28,3 +28,75 @@
     justify-content: center;
     gap: 8px;
 }
+
+.search_result {
+    /* Size */
+    width: 450px;
+    height: 60px;
+    border: 2px solid;
+
+    /* Display */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    /* Position */
+    position: relative;
+
+    /* Color */
+    border-color: #e0ca9f #544c3b #544c3b #e0ca9f;
+    background-color: #a09172;
+    color: #4b4335;
+}
+
+.search_result:hover {
+    /* Color */
+    border-color: #fab9ef #654c61 #654c61 #fab9ef;
+    background-color: #b688ae;
+}
+
+.search_result img {
+    /* Rendering */
+    image-rendering: pixelated;
+}
+
+.search_result_enchant_level {
+    /* Size */
+    margin: 0 5px;
+}
+
+.search_result_dividend {
+    /* Display */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
+
+    /* Position */
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+
+    /* Text */
+    font-size: 21px;
+}
+
+.search_result_dividend > span {
+    width: 23px;
+}
+
+.search_result_enchants {
+    /* Size */
+    width: 70%;
+    height: 100%;
+    padding: 5px 0;
+
+    /* Display */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0 10px;
+}

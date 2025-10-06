@@ -5,6 +5,9 @@ import MinecraftInventory, { type MinecraftItem } from "../../../components/Mine
 import ContentPanel from "../../../components/ContentPanel/ContentPanel";
 import Toast from "../../../components/Toast/Toast";
 import probabilityAlterImage from '../../../assets/probability_alter.png';
+import enchantLevel1 from '../../../assets/enchant_level_1.png';
+import enchantLevel2 from '../../../assets/enchant_level_2.png';
+import enchantLevel3 from '../../../assets/enchant_level_3.png';
 import bookImage from '../../../assets/book.png';
 import enchantedBookImage from '../../../assets/enchanted_book.gif';
 import ironSwordImage from '../../../assets/iron_sword.png';
@@ -34,9 +37,11 @@ function EnchantLookup() {
         return newItems;
     });
 
-    if (selectedEnchants.size > 0) {
-        console.log(lookupResult(itemClass.id, [...selectedEnchants][0].id));
-    }
+    const lookupResults = getLookupResults(itemClass.id, [...selectedEnchants].map(item => item.id))
+
+    const lookupResultComponents = lookupResults.map(result => (
+        <SearchResult key={`${result.dividend}-${result.level}-${result.enchantments}`} result={result} />
+    ));
 
     return (
         <section className={styles.enchant_lookup}>
@@ -70,13 +75,54 @@ function EnchantLookup() {
                 </ContentPanel>
             </div>
 
-
             <div className={styles.lookup_result}>
-                <Toast title="Rule Breaker" icon={probabilityAlterImage}>
+                <ContentPanel title="Results">
+                    {lookupResultComponents}
+                </ContentPanel>
+                {/* <Toast title="Rule Breaker" icon={probabilityAlterImage}>
                     <span>Dividend: {5}</span>
-                </Toast>
+                </Toast> */}
             </div>
         </section>
+    );
+}
+
+function SearchResult({ result }: { result: LookupSearchResult }) {
+    const enchantLevels = [enchantLevel1, enchantLevel2, enchantLevel3];
+    const romanNumeral = ["", "I", "II", "III", "IV", "V"];
+
+    const enchantDisplays = result.enchantments
+        .map((enchant, index) => {
+            const key = `${enchant.id}-${enchant.lvl}-${index}`;
+            return <span key={key}>{`${displayName(enchant.id)} ${romanNumeral[enchant.lvl]}`}</span>
+        });
+    
+    return (
+        <div className={styles.search_result}>
+            <img
+                src={enchantLevels[result.level - 1]}
+                alt={`enchant level ${result.level}`}
+                className={styles.search_result_enchant_level}
+                draggable={false}
+                width={32}
+                height={32}
+            />
+            
+            <div className={styles.search_result_enchants}>
+                {enchantDisplays}
+            </div>
+
+            <div className={styles.search_result_dividend}>
+                <img
+                    src={probabilityAlterImage}
+                    alt="rule breaker dividend level"
+                    draggable={false}
+                    width={32}
+                    height={32}
+                />
+                <span>{result.dividend.toString().padStart(2, "0")}</span>
+            </div>
+        </div>
     );
 }
 
@@ -128,22 +174,28 @@ function displayName(id: string): string {
         .join(' ');
 }
 
-function lookupResult(itemClass: keyof MahouTsukaiLookup, enchant_id: string) {
+function getLookupResults(itemClass: keyof MahouTsukaiLookup, enchantmentIds: string[]) {
     const results: LookupSearchResult[] = [];
 
     for (const dividendData of lookupData[itemClass]) {
         Object.values(dividendData.enchantments).forEach((enchantments, level) => {
-            if (!enchantments.find(enchantment => enchantment.id === enchant_id))
+            if (!enchantments.find(enchant => enchantmentIds.includes(enchant.id)))
                 return;
-        
+
             results.push({ dividend: dividendData.dividend, level: level + 1, enchantments });
         });
     }
 
+    const getTotalSearchedEnchantmentsLevel = (value: LookupSearchResult) => {
+        return value.enchantments
+            .filter(enchant => enchantmentIds.includes(enchant.id))
+            .reduce((total, enchant) => total + enchant.lvl, 0);
+    } 
+
     return results
         .sort((a, b) => {
-            const levelA = a.enchantments.find(enchant => enchant.id === enchant_id)?.lvl ?? 0;
-            const levelB = b.enchantments.find(enchant => enchant.id === enchant_id)?.lvl ?? 0;
+            const levelA = getTotalSearchedEnchantmentsLevel(a);
+            const levelB = getTotalSearchedEnchantmentsLevel(b);
 
             const scoreA = levelA * 1000 + a.enchantments.length * 100 - a.level * 10 - a.dividend;
             const scoreB = levelB * 1000 + b.enchantments.length * 100 - b.level * 10 - b.dividend;
