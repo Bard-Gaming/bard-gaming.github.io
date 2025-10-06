@@ -7,18 +7,18 @@ interface MinecraftItem {
     icon: string;
 }
 
-type MinecraftItemProps = {
-    item: MinecraftItem;
-    onClick: MinecraftInventoryProps["onClick"];
+type MinecraftItemProps<T extends MinecraftItem = MinecraftItem> = {
+    item: T;
+    onClick: MinecraftInventoryProps<T>["onClick"];
 }
 
-interface MinecraftInventoryProps {
-    items?: MinecraftItem[];
-    onClick?: (item: MinecraftItem) => void;
+interface MinecraftInventoryProps<T extends MinecraftItem = MinecraftItem> {
+    items?: T[];
+    onClick?: (item: T) => void;
     columns?: number;
 }
 
-function MinecraftItem({ item, onClick }: MinecraftItemProps) {
+function MinecraftItem<T extends MinecraftItem>({ item, onClick }: MinecraftItemProps<T>) {
     const [panelPos, setPanelPos] = useState<{x: number, y: number} | null>(null);
     const offset = 15;
 
@@ -43,7 +43,7 @@ function MinecraftItem({ item, onClick }: MinecraftItemProps) {
 }
 
 
-function MinecraftInventory({ onClick, items = [], columns = 13 }: MinecraftInventoryProps) {
+function MinecraftInventory<T extends MinecraftItem>({ onClick, items = [], columns = 13 }: MinecraftInventoryProps<T>) {
     const itemComponents = items.map(item => (
         <MinecraftItem key={item.id} item={item} onClick={onClick} />
     ));
