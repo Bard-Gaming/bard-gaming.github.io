@@ -7,13 +7,8 @@ import probabilityAlterImage from '../../../assets/probability_alter.png';
 import enchantLevel1 from '../../../assets/enchant_level_1.png';
 import enchantLevel2 from '../../../assets/enchant_level_2.png';
 import enchantLevel3 from '../../../assets/enchant_level_3.png';
-import bookImage from '../../../assets/book.png';
-import enchantedBookImage from '../../../assets/enchanted_book.gif';
-import ironSwordImage from '../../../assets/iron_sword.png';
-import enchantedIronSwordImage from '../../../assets/enchanted_iron_sword.gif';
-import ironPickaxeImage from '../../../assets/iron_pickaxe.png';
-import enchantedIronPickaxeImage from '../../../assets/enchanted_iron_pickaxe.gif';
 import type { MahouTsukaiLookup, MinecraftEnchantment } from "./data/types";
+import { getItemTexture } from "../../../utils/minecraft";
 
 
 function EnchantLookup() {
@@ -140,15 +135,9 @@ function getAvailableEnchants(): MinecraftItem[] {
         .map(id => ({
             id,
             name: displayName(id),
-            icon: enchantedBookImage,
+            icon: getItemTexture("book", true),
         }));
 }
-
-const itemClassIconLookup = {
-    book: [bookImage, enchantedBookImage],
-    sword: [ironSwordImage, enchantedIronSwordImage],
-    pickaxe: [ironPickaxeImage, enchantedIronPickaxeImage],
-} satisfies Record<keyof MahouTsukaiLookup, [string, string]>;
 
 function getItemClasses(): MinecraftItemClass[] {
     return mahouTsukaiLookupKeys()
@@ -156,8 +145,8 @@ function getItemClasses(): MinecraftItemClass[] {
         .map(key => ({
             id: key,
             name: displayName(key),
-            icon: itemClassIconLookup[key][0],
-            enchantedIcon: itemClassIconLookup[key][1],
+            icon: getItemTexture(key),
+            enchantedIcon: getItemTexture(key, true),
         }));
 }
 
