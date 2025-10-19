@@ -11,6 +11,8 @@ import bookImage from '../../../assets/book.png';
 import enchantedBookImage from '../../../assets/enchanted_book.gif';
 import ironSwordImage from '../../../assets/iron_sword.png';
 import enchantedIronSwordImage from '../../../assets/enchanted_iron_sword.gif';
+import ironPickaxeImage from '../../../assets/iron_pickaxe.png';
+import enchantedIronPickaxeImage from '../../../assets/enchanted_iron_pickaxe.gif';
 import type { MahouTsukaiLookup, MinecraftEnchantment } from "./data/types";
 
 
@@ -145,6 +147,7 @@ function getAvailableEnchants(): MinecraftItem[] {
 const itemClassIconLookup = {
     book: [bookImage, enchantedBookImage],
     sword: [ironSwordImage, enchantedIronSwordImage],
+    pickaxe: [ironPickaxeImage, enchantedIronPickaxeImage],
 } satisfies Record<keyof MahouTsukaiLookup, [string, string]>;
 
 function getItemClasses(): MinecraftItemClass[] {
