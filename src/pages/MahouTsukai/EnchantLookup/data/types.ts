@@ -18,7 +18,7 @@ export type MahouTsukaiDividendData = {
 };
 
 export type MahouTsukaiLookup = {
-    pickaxe: MahouTsukaiDividendData[];
+    iron_pickaxe: MahouTsukaiDividendData[];
+    iron_sword: MahouTsukaiDividendData[];
     book: MahouTsukaiDividendData[];
-    sword: MahouTsukaiDividendData[];
 };
