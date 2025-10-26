@@ -23,4 +23,5 @@ export type MahouTsukaiLookup = {
     iron_sword: MahouTsukaiDividendData[];
     iron_chestplate: MahouTsukaiDividendData[];
     iron_helmet: MahouTsukaiDividendData[];
+    iron_leggings: MahouTsukaiDividendData[];
 };
